@@ -74,7 +74,7 @@
 	<a th:href="@{/}">홈</a>
 
 	<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
-	<script th:inline="javascript">
+ 	<script th:inline="javascript"> 
 		$(function() {
 
 			$(".pagination a").click(function(e) {
@@ -87,7 +87,7 @@
 			$("#searchBtn").on("click", function(){
 				let typeStr = $("#searchType").find(":selected").val();
 				let keywordStr = $("#searchKeyword").val();
-				
+			
 				console.log(typeStr, "", keywordStr);
 				
 				formObj.find("[name='type']").val(typeStr);
@@ -98,10 +98,15 @@
 			});
 			
 			$(".boardLink").on("click", function(e){
+				let link = /*[[ @{/board/detail} ]]*/
+				
 				e.preventDefault();
 				let boardNo = $(this).attr("href");
-				formObj.attr("action", [[@{'/board/detail'}]]);
-/* 				formObj.attr("action", [[@{'/board/detail'}]]); */
+				/* formObj.attr("action", "[[@{'/board/detail'}]]"); */
+				console.log("링크 : "+ boardNo);
+				formObj.attr("action", link);
+				formObj.append("<input type='hidden' name='bno' value='" + boardNo+"''>");
+				formObj.submit();
 			});
 
 
